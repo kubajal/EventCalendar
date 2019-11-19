@@ -36,7 +36,7 @@ steps:
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure dla studentów(6d784889-8525-48ae-8a5a-ddb25dd465d3)'
+    azureSubscription: 'Azure dla studentów(1)(6d784889-8525-48ae-8a5a-ddb25dd465d3)'
     appType: 'webApp'
     WebAppName: 'apsi2019'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(build.artifactStagingDirectory)\WebApp.zip'
