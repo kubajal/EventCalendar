@@ -19,7 +19,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'dotnet tool install --global dotnet-ef'
+    script: 'dotnet tool install --global dotnet-ef --version 3.0'
 
 - task: NuGetCommand@2
   inputs:
