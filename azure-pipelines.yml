@@ -24,7 +24,9 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'custom'
-    custom: 'ef database update'
+    projects: '**/*.csproj'
+    custom: 'ef'
+    arguments: 'database update'
 
 - task: VSBuild@1
   inputs:
