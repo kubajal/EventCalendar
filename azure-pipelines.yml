@@ -13,13 +13,13 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Debug'
+    
+steps:
+- task: NuGetToolInstaller@1
 
 - task: CmdLine@2
   inputs:
     script: 'dotnet'
-    
-steps:
-- task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
   inputs:
