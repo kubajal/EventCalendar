@@ -20,13 +20,9 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
-
-- task: DotNetCoreCLI@2
+- task: CmdLine@2
   inputs:
-    command: 'custom'
-    projects: '**/*.csproj'
-    custom: 'ef'
-    arguments: 'database update'
+    script: 'ls'
 
 - task: VSBuild@1
   inputs:
