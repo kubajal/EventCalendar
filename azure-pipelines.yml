@@ -28,6 +28,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Azure dla studentów(6d784889-8525-48ae-8a5a-ddb25dd465d3)'
+    scriptType: 'ps'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'dotnet ef database update'
+
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
