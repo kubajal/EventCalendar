@@ -21,9 +21,11 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: CmdLine@2
+- task: DotNetCoreCLI@2
   inputs:
-    script: 'dotnet ef database update'
+    command: 'custom'
+    projects: '**/app.csproj'
+    custom: 'ef database update'
 
 - task: VSBuild@1
   inputs:
