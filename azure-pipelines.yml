@@ -23,7 +23,9 @@ steps:
     script: |
       dotnet tool install --global dotnet-ef --version 3.0
       cd app
-      mv appsettings.Azure.json appsettings.json 
+      mv $(appsettings-azure.secureFilePath) appsettings.json
+      ls
+      cat appsettings.json
       dotnet ef database update
 
 - task: NuGetCommand@2
