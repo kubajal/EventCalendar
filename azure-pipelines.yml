@@ -26,14 +26,14 @@ steps:
 - task: CmdLine@2
   inputs:
     script:
-      cd app
-      ls
-      mv $(deploymentAppsettings.secureFilePath) .
-      mv deploymentAppsettings.json appsettings.json
-      ls
-      cat appsettings.json
-      dotnet tool install --global dotnet-ef --version 3.0
-      dotnet ef database update
+      cd app;
+      ls;
+      mv $(deploymentAppsettings.secureFilePath) . ;
+      mv deploymentAppsettings.json appsettings.json;
+      ls;
+      cat appsettings.json;
+      dotnet tool install --global dotnet-ef --version 3.0;
+      dotnet ef database update;
 
 - task: NuGetCommand@2
   inputs:
