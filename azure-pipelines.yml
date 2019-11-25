@@ -29,7 +29,8 @@ steps:
     script: |
       cd app
       ls
-      mv $(deploymentAppsettings.secureFilePath) ./appsettings.json
+      mv $(deploymentAppsettings.secureFilePath) .
+      mv deploymentAppsettings.json appsettings.json
       ls
       cat appsettings.json
       dotnet tool install --global dotnet-ef --version 3.0
