@@ -26,14 +26,15 @@ steps:
 - task: CmdLine@2
   inputs:
     script:
-      cd app
-      ls
-      mv $(deploymentAppsettings.secureFilePath) .
-      mv deploymentAppsettings.json appsettings.json
-      ls
-      cat appsettings.json
-      dotnet tool install --global dotnet-ef --version 3.0
-      dotnet ef database update
+      # call https://github.com/Microsoft/azure-pipelines-tasks/issues/5123
+      call cd app
+      call ls
+      call mv $(deploymentAppsettings.secureFilePath) .
+      call mv deploymentAppsettings.json appsettings.json
+      call ls
+      call cat appsettings.json
+      call dotnet tool install --global dotnet-ef --version 3.0
+      call dotnet ef database update
 
 - task: NuGetCommand@2
   inputs:
