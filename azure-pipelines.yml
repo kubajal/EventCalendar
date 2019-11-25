@@ -26,8 +26,8 @@ steps:
 - task: CmdLine@2
   inputs:
     script:
-      ls;
-      cd app;
+      ls
+      cd app
 
 - task: NuGetCommand@2
   inputs:
