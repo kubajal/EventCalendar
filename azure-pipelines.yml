@@ -17,23 +17,27 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
+- task: DownloadSecureFile@1
+  name: deploymentAppsettings
+  displayName: 'Download appsettings for Azure'
+  inputs:
+    secureFile: 'deploymentAppsettings.json'
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
-      dotnet tool install --global dotnet-ef --version 3.0
       cd app
-      mv $(appsettings-azure.secureFilePath) appsettings.json
       ls
+      mv $(deploymentAppsettings.secureFilePath) ./appsettings.json
+      ls
+      dotnet tool install --global dotnet-ef --version 3.0
       cat appsettings.json
       dotnet ef database update
 
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
-- task: CmdLine@2
-  inputs:
-    script: 'ls'
 
 - task: VSBuild@1
   inputs:
