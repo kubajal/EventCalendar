@@ -23,10 +23,9 @@ steps:
   inputs:
     secureFile: 'deploymentAppsettings.json'
 
-- task: Bash@3
+- task: CmdLine@2
   inputs:
-    targetType: 'inline'
-    script: |
+    script:
       cd app
       ls
       mv $(deploymentAppsettings.secureFilePath) .
