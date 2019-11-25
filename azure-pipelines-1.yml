@@ -30,7 +30,6 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      echo %MIGRACJA%
       ls
       cd app
       ls
@@ -39,4 +38,4 @@ steps:
       ls
       cat appsettings.json
       dotnet tool install --global dotnet-ef --version 3.0
-      dotnet ef database update
+      dotnet ef database update %MIGRACJA%
