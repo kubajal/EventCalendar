@@ -31,8 +31,6 @@ steps:
     SqlPassword: 'Qwerty2019.'
     deployType: 'InlineSqlTask'
     SqlInline: |
-      info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
-            Entity Framework Core 3.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
       IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
       BEGIN
           CREATE TABLE [__EFMigrationsHistory] (
