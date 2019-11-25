@@ -30,7 +30,7 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      echo $MIGRACJA
+      echo %MIGRACJA%
       ls
       cd app
       ls
