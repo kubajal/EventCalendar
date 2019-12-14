@@ -10,12 +10,14 @@ using System.Threading.Tasks;
 
 namespace app.Data
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class AuthorizationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(
+        public AuthorizationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+        public DbSet<ApplicationUser> DotNetUsers { get; set; }
+        public DbSet<Event> Events { get; set; }
     }
 }
