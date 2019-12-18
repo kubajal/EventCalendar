@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -14,7 +14,8 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EventComponent } from './events/event/event';
+import { EventComponent } from './events/event/event.component';
+
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { EventComponent } from './events/event/event';
       { path: 'create-event', component: EventComponent },
     ]),
     PopupModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
