@@ -13,13 +13,13 @@ const localUrl = 'assets/events.json';
 export class EventService {
 
   getEvents(): Observable<MyEvent[]> {
-    return this.http.get<MyEventAttrs[]>(localUrl + `/events`).pipe(
+    return this.http.get<MyEventAttrs[]>(localUrl).pipe(
       map((data) => data.map((myEventAttrs) => new MyEvent(myEventAttrs)))
     );
   }
 
   createEvent(data: MyEventAttrs): Observable<MyEvent> {
-    return this.http.post<MyEventAttrs>(localUrl + `events`, data).pipe(
+    return this.http.post<MyEventAttrs>(localUrl, data).pipe(
       map((myEventAttrs) => new MyEvent(myEventAttrs))
     );
   }

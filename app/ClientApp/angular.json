@@ -21,12 +21,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/assets",
-              {
-                "glob": "events.json",
-                "input": "./",
-                "output": "./assets/"
-              }
+              "src/assets"
             ],
             "styles": [
               {
