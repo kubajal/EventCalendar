@@ -14,6 +14,8 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EventCreateComponent } from './events/event-create/event-create.component';
+import { EventsListComponent } from './events/events-list/events-list.component';
 import { EventComponent } from './events/event/event.component';
 
 
@@ -25,6 +27,8 @@ import { EventComponent } from './events/event/event.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
+    EventCreateComponent,
+    EventsListComponent,
     EventComponent
   ],
   imports: [
@@ -36,7 +40,7 @@ import { EventComponent } from './events/event/event.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      { path: 'create-event', component: EventComponent },
+      { path: 'create-event', component: EventCreateComponent },
     ]),
     PopupModule,
     BrowserAnimationsModule,

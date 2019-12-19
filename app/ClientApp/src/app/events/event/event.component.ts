@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Event } from '../event';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { MyEvent } from '../myEvent';
 
 @Component({
   selector: 'app-event',
@@ -9,26 +8,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class EventComponent implements OnInit {
 
-  constructor() { }
-  eventsList = Array<Event>();
-  form: FormGroup;
+  @Input() event: MyEvent;
 
-  submitted = false;
-  save() {
-    this.submitted = true;
-    const event = this.form.value;
-    this.eventsList.push(event);
-    console.log('this.form.value' + this.form.value);
-    console.log('lista eventów' + this.eventsList);
-  }
+  constructor() { }
+
   ngOnInit() {
-    this.form = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      date: new FormControl(null, Validators.required),
-      place: new FormControl(null, Validators.required),
-      description: new FormControl(null, Validators.required)
-    }
-    );
   }
 
 }
