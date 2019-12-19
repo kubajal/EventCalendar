@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { MyEvent, MyEventAttrs } from './myEvent';
 import { map } from 'rxjs/operators';
 
-const localUrl = 'assets/data/events.json';
+const localUrl = 'assets/events.json';
 
 @Injectable({
   providedIn: 'root'
