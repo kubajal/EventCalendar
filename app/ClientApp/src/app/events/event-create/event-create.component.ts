@@ -11,14 +11,11 @@ import { EventService } from '../event.service';
 export class EventCreateComponent implements OnInit {
 
   constructor(private eventService: EventService) { }
-  eventsList = Array<MyEvent>();
   form: FormGroup;
 
   save() {
     const event = this.form.value;
     this.eventService.createEvent(event);
-
-    this.eventsList.push(event);
   }
   ngOnInit() {
     this.form = new FormGroup({
