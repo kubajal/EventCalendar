@@ -16,6 +16,7 @@ namespace app.Data
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
+            this.Database.Migrate();
         }
         public DbSet<ApplicationUser> DotNetUsers { get; set; }
         public DbSet<Event> Events { get; set; }
