@@ -28,12 +28,13 @@ steps:
     TaskType: 'sqlInline'
     InlineSql: |
       drop database if exists apsi;
-                  create database apsi;
+                        create database apsi;
     ServerName: 'apsi2019.database.windows.net'
     DatabaseName: 'master'
     AuthScheme: 'sqlServerAuthentication'
     SqlUsername: 'apsi'
     SqlPassword: 'Qwerty2019.'
+    AdditionalArgumentsSql: 'Connection Timeout=90;'
 
 - task: CmdLine@2
   inputs:
