@@ -26,13 +26,12 @@ steps:
 - task: SqlAzureDacpacDeployment@1
   inputs:
     azureSubscription: 'Azure dla studentów(6d784889-8525-48ae-8a5a-ddb25dd465d3)'
-    AuthenticationType: 'aadAuthenticationIntegrated'
-    ServerName: 'apsi2019.database.windows.net'
-    DatabaseName: 'apsi'
+    AuthenticationType: 'connectionString'
+    ConnectionString: 'Server=tcp:apsi2019.database.windows.net,1433;Initial Catalog=apsi;Persist Security Info=False;User ID=apsi;Password=Qwerty2019.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
     deployType: 'InlineSqlTask'
     SqlInline: |
       drop database if exsists apsi;
-      create database apsi;
+            create database apsi;
     IpDetectionMethod: 'AutoDetect'
 
 - task: CmdLine@2
