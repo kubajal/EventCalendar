@@ -34,7 +34,7 @@ steps:
     AuthScheme: 'sqlServerAuthentication'
     SqlUsername: 'apsi'
     SqlPassword: 'Qwerty2019.'
-    AdditionalArgumentsSql: 'Connection Timeout=90;'
+    AdditionalArgumentsSql: 'ConnectionTimeout=90;'
 
 - task: CmdLine@2
   inputs:
