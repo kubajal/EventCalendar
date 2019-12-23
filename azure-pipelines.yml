@@ -23,6 +23,18 @@ steps:
   inputs:
     secureFile: 'deploymentAppsettings.json'
 
+- task: SqlAzureDacpacDeployment@1
+  inputs:
+    azureSubscription: 'Azure dla studentów(6d784889-8525-48ae-8a5a-ddb25dd465d3)'
+    AuthenticationType: 'aadAuthenticationIntegrated'
+    ServerName: 'apsi2019.database.windows.net'
+    DatabaseName: 'apsi'
+    deployType: 'InlineSqlTask'
+    SqlInline: |
+      drop database if exsists apsi;
+      create database apsi;
+    IpDetectionMethod: 'AutoDetect'
+
 - task: CmdLine@2
   inputs:
     script: |
@@ -30,7 +42,7 @@ steps:
       mv $(deploymentAppsettings.secureFilePath) .
       mv deploymentAppsettings.json appsettings.json
       dotnet tool install --global dotnet-ef --version 3.0
-      dotnet ef database update
+      dotnet ef database update --verbose
 
 - task: NuGetCommand@2
   inputs:
