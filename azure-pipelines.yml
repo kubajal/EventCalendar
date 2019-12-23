@@ -30,7 +30,7 @@ steps:
     ConnectionString: 'Server=tcp:apsi2019.database.windows.net,1433;Initial Catalog=apsi;Persist Security Info=False;User ID=apsi;Password=Qwerty2019.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
     deployType: 'InlineSqlTask'
     SqlInline: |
-      drop database if exsists apsi;
+      drop database if exists apsi;
             create database apsi;
     IpDetectionMethod: 'AutoDetect'
 
