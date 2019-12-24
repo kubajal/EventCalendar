@@ -23,17 +23,6 @@ steps:
   inputs:
     secureFile: 'deploymentAppsettings.json'
 
-- task: SqlDacpacDeploymentOnMachineGroup@0
-  inputs:
-    TaskType: 'sqlInline'
-    InlineSql: |
-      drop database if exists apsi;
-                              create database apsi;
-    ServerName: 'localhost'
-    DatabaseName: 'apsi2019.database.windows.net'
-    AuthScheme: 'sqlServerAuthentication'
-    SqlUsername: 'apsi'
-    SqlPassword: 'Qwerty2019.'
 - task: CmdLine@2
   inputs:
     script: |
