@@ -30,7 +30,7 @@ steps:
       mv $(deploymentAppsettings.secureFilePath) .
       mv deploymentAppsettings.json appsettings.json
       dotnet tool install --global dotnet-ef --version 3.0
-      dotnet ef database update
+      dotnet ef database update --verbose
 
 - task: NuGetCommand@2
   inputs:
