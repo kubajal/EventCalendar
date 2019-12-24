@@ -16,8 +16,25 @@ namespace app.Data
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
+            this.Database.Migrate();
         }
         public DbSet<ApplicationUser> DotNetUsers { get; set; }
         public DbSet<Event> Events { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ApplicationUserEvent>()
+                .HasKey(bc => new { bc.EventId, bc.Id});
+            modelBuilder.Entity<ApplicationUserEvent>()
+                .HasOne(bc => bc.Event)
+                .WithMany(b => b.Subscribers)
+                .HasForeignKey(bc => bc.EventId);
+            modelBuilder.Entity<ApplicationUserEvent>()
+                .HasOne(bc => bc.ApplicationUser)
+                .WithMany(b => b.Subscriptions)
+                .HasForeignKey(bc => bc.Id);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -10,13 +10,12 @@ namespace app.Models
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        public String FirstName;
+        public String FirstName { get; set; }
         [Required]
-        public String LastName;
+        public String LastName { get; set; }
         [Required]
-        public String asdf;
-        [Required]
-        public DateTime TimeRegistered;
+        public DateTime TimeRegistered { get; set; }
+        public List<ApplicationUserEvent> Subscriptions { get; set; }
 
         public void SetFirstName(String _firstName)
         {
