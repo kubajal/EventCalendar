@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import {Observable} from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { MyEvent, MyEventAttrs} from "./event";
 
@@ -25,5 +25,13 @@ export class EventService {
     return this.http.post<MyEventAttrs>(this.baseUrl + this.eventControllerPath, data).pipe(
       map((myEventAttrs) => new MyEvent(myEventAttrs))
     );
+  }
+
+  deleteEvent(id: number): void {
+    let httpParams = new HttpParams().set('eventId', id.toString());
+    httpParams.set('eventId', id.toString());
+
+    let options = { params: httpParams };
+    this.http.delete(this.baseUrl + this.eventControllerPath, options).subscribe();
   }
 }

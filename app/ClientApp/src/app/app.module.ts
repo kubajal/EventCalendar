@@ -15,6 +15,7 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EventCreateComponent } from './events/event-create/event-create.component';
+import { EventDeleteComponent } from './events/event-delete/event-delete.component';
 
 
 
@@ -25,7 +26,8 @@ import { EventCreateComponent } from './events/event-create/event-create.compone
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    EventCreateComponent
+    EventCreateComponent,
+    EventDeleteComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,7 +38,8 @@ import { EventCreateComponent } from './events/event-create/event-create.compone
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      { path: 'create-event', component: EventCreateComponent}
+      { path: 'create-event', component: EventCreateComponent},
+      { path: 'delete-event', component: EventDeleteComponent}
     ]),
     PopupModule,
     BrowserAnimationsModule,

@@ -9,7 +9,7 @@ using app.Data;
 namespace app.Migrations
 {
     [DbContext(typeof(AuthorizationDbContext))]
-    [Migration("20191223140132_Initial")]
+    [Migration("20200117203856_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -328,6 +328,10 @@ namespace app.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("CreatorId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -337,6 +341,8 @@ namespace app.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("EventId");
+
+                    b.HasIndex("CreatorId");
 
                     b.ToTable("Events");
                 });
@@ -403,6 +409,15 @@ namespace app.Migrations
                     b.HasOne("app.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Subscriptions")
                         .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("app.Models.Event", b =>
+                {
+                    b.HasOne("app.Models.ApplicationUser", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
