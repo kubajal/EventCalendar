@@ -46,5 +46,11 @@ namespace app.Controllers
             //.ToArray();
             //return x;
         }
+        [HttpPost]
+        public void Post(Event e)
+        {
+            DbContext.Events.Add(e);
+            DbContext.SaveChanges();
+        }
     }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MyEvent } from '../myEvent';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { EventService } from '../event.service';
+import { EventService } from 'src/app/fetch-data/event.service';
 
 @Component({
   selector: 'app-event-create',
@@ -20,8 +19,6 @@ export class EventCreateComponent implements OnInit {
   ngOnInit() {
     this.form = new FormGroup({
       name: new FormControl(null, Validators.required),
-      date: new FormControl(null, Validators.required),
-      place: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required)
     }
     );

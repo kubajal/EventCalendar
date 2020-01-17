@@ -23,6 +23,7 @@ namespace app.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<ApplicationUserEvent>()
                 .HasKey(bc => new { bc.EventId, bc.Id});
             modelBuilder.Entity<ApplicationUserEvent>()
@@ -33,6 +34,7 @@ namespace app.Data
                 .HasOne(bc => bc.ApplicationUser)
                 .WithMany(b => b.Subscriptions)
                 .HasForeignKey(bc => bc.Id);
+            modelBuilder.Entity<Event>().HasData(new Event() { EventId = 1, Name = "Event 1", Description = "Description" });
 
             base.OnModelCreating(modelBuilder);
         }
