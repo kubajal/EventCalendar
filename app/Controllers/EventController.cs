@@ -47,9 +47,15 @@ namespace app.Controllers
             //return x;
         }
         [HttpPost]
-        public void Post(Event e)
+        public void Post(EventCreationModel e)
         {
-            DbContext.Events.Add(e);
+            DbContext.Events.Add(new Event()
+            {
+                EventId = DbContext.Events.Max(e => e.EventId) + 1,
+                Description = e.description,
+                Name = e.name,
+                Subscribers = new List<ApplicationUserEvent>()
+            });
             DbContext.SaveChanges();
         }
     }
