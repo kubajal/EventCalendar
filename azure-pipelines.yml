@@ -19,8 +19,8 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      cd app;
-      ls;
+      cd app
+      ls
 
 - task: DownloadSecureFile@1
   name: deploymentAppsettings
