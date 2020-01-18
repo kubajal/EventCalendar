@@ -17,8 +17,31 @@
       <td>{{ event.eventId }}</td>
       <td>{{ event.name}}</td>
       <td>{{ event.description}}</td>
+      <td> <button mat-raised-button (click)="delete(event.eventId)" type="submit" class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
     </tr>
   </tbody>
 </table>
 
-<button [routerLink]="['/delete-event']">Delete event</button>
+<form [formGroup]="form">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" formControlName="name">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" formControlName="description">
+    </div>
+    <button  [disabled]="disabaleBtn" (click)="create()" type="submit" class="btn btn-success">Submit</button>
+    <button type="cancel" class="btn btn-danger" [routerLink]="['/']">Cancel</button>
+</form>
+
+<div *ngIf="opened">
+  <button #anchor class="k-button" (click)="onToggle()" >ok</button>
+<div>
+<kendo-popup class="content" [anchor]="anchor" (anchorViewportLeave)="opened = true" *ngIf="opened">
+        <!-- User-defined content -->
+        <div class="content">
+          {{message}}
+        </div>
+</kendo-popup>

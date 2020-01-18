@@ -56,44 +56,80 @@ namespace app.Controllers
                 .Include(e => e.Creator)
                 .Where(e => e.EventId == id)
                 .FirstOrDefault();
-            DbContext.Entry(e).Reference(p => p.Creator).Load();
             if (e == null)
-                return NotFound("Event with ID " + eventId + " was not found");
+                return NotFound(
+                    new CRUDResponse
+                    {
+                        IsSuccess = false,
+                        Message = "Event with ID " + eventId + " was not found"
+                    });
+            DbContext.Entry(e).Reference(p => p.Creator).Load();
             var currentUser = GetCurrentUser();
-            if (e.Creator.Id != currentUser.Id)
-                return Unauthorized("Event with ID " + eventId + " cant be deleted by user " + e.Creator.Id.ToString());
+            if (
+                // creator of this event has been deleted from the db
+                e.Creator == null 
+                // user which is trying to deleted the event does not have permissions
+                || e.Creator.Id != currentUser.Id)
+                return Unauthorized(
+                    new CRUDResponse
+                    {
+                        IsSuccess = false,
+                        Message = "You do not have permissions to delete event with id " + eventId
+                    });
             DbContext.Events.Remove(e);
             DbContext.SaveChanges();
-            return Ok();
+            return Ok(new CRUDResponse
+            {
+                IsSuccess = true,
+                Message = "Event has been deleted"
+            }) ;
         }
         [HttpPost]
-        public void PostAsync(EventCreationModel e)
+        public object PostAsync(EventCreationModel e)
         {
             ApplicationUser CurrentUser = GetCurrentUser();
+            Event newEvent = null;
 
-            if (DbContext.Events.Count() == 0)
+            try
             {
-                DbContext.Events.Add(new Event()
+                if (DbContext.Events.Count() == 0)
                 {
-                    EventId = 1,
-                    Description = e.description,
-                    Name = e.name,
-                    Subscribers = new List<ApplicationUserEvent>(),
-                    Creator = CurrentUser
-                });
+                    newEvent = new Event()
+                    {
+                        EventId = 1,
+                        Description = e.description,
+                        Name = e.name,
+                        Subscribers = new List<ApplicationUserEvent>(),
+                        Creator = CurrentUser
+                    };
+                }
+                else
+                {
+                    newEvent = new Event()
+                    {
+                        EventId = DbContext.Events.Max(e => e.EventId) + 1,
+                        Description = e.description,
+                        Name = e.name,
+                        Subscribers = new List<ApplicationUserEvent>(),
+                        Creator = CurrentUser
+                    };
+                }
             }
-            else
+            catch(Exception ex)
             {
-                DbContext.Events.Add(new Event()
+                return new CRUDResponse
                 {
-                    EventId = DbContext.Events.Max(e => e.EventId) + 1,
-                    Description = e.description,
-                    Name = e.name,
-                    Subscribers = new List<ApplicationUserEvent>(),
-                    Creator = CurrentUser
-                });
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
             }
+            DbContext.Events.Add(newEvent);
             DbContext.SaveChanges();
+            return new CRUDResponse
+            {
+                IsSuccess = true,
+                Message = newEvent.EventId.ToString()
+            };
         }
 
         private ApplicationUser GetCurrentUser()
