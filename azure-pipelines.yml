@@ -17,6 +17,10 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
+- task: CmdLine@2
+  inputs:
+    script: 'ls'
+
 - task: DownloadSecureFile@1
   name: deploymentAppsettings
   displayName: 'Download appsettings for Azure'
