@@ -17,6 +17,7 @@
       <td>{{ event.eventId }}</td>
       <td>{{ event.name}}</td>
       <td>{{ event.description}}</td>
+      <td><img src="{{ event.pathToImage}}" height="60" width="60"></td>
       <td> <button mat-raised-button (click)="delete(event.eventId)" type="submit" class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
     </tr>
   </tbody>

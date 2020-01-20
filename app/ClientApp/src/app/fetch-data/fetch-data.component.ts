@@ -23,6 +23,8 @@ export class FetchDataComponent implements OnInit{
     @Inject('BASE_URL') baseUrl: string) {
     //this.events = eventService.getEvents()
   }
+  
+  private paths: Array<string> = ["fruit", "kookaburra", "orange", "tree"]
 
   ngOnInit() {
     this.eventService.getEvents().subscribe(eventsFromApi => {
@@ -30,7 +32,8 @@ export class FetchDataComponent implements OnInit{
         this.events.push({
           eventId: event.eventId,
           description: event.description,
-          name: event.name
+          name: event.name,
+          pathToImage: "assets/" + this.paths[Math.floor(Math.random() * 4)] + ".jpg"
         });
       }
     });
