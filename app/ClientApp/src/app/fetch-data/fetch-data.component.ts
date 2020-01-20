@@ -7,7 +7,8 @@ import { CRUDResponse } from './CRUDResponse';
 
 @Component({
   selector: 'app-fetch-data',
-  templateUrl: './fetch-data.component.html'
+  templateUrl: './fetch-data.component.html',
+  styleUrls: ['./fetch-data.component.css']
 })
 export class FetchDataComponent implements OnInit{
   public events: MyEvent[] = Array<MyEvent>();

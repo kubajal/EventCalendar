@@ -2,7 +2,15 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
+  
+
+<div class="test">
+  Test test test
+</div>
+
 <p *ngIf="!events"><em>Loading...</em></p>
+
+
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="events">
   <thead>
@@ -24,10 +32,10 @@
 </table>
 
 <form [formGroup]="form">
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" formControlName="name">
-    </div>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" formControlName="name">
+  </div>
 
     <div class="form-group">
         <label for="description">Description</label>
@@ -39,10 +47,13 @@
 
 <div *ngIf="opened">
   <button #anchor class="k-button" (click)="onToggle()" >ok</button>
-<div>
-<kendo-popup class="content" [anchor]="anchor" (anchorViewportLeave)="opened = true" *ngIf="opened">
-        <!-- User-defined content -->
-        <div class="content">
-          {{message}}
-        </div>
-</kendo-popup>
+  <div>
+    <kendo-popup class="content" [anchor]="anchor" (anchorViewportLeave)="opened = true" *ngIf="opened">
+      <!-- User-defined content -->
+      <div class="content">
+        {{message}}
+      </div>
+    </kendo-popup>
+
+
+    
