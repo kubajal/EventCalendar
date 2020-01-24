@@ -2,7 +2,7 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-  
+
 
 <div class="test">
   Test test test
@@ -36,16 +36,26 @@
     <input placeholder="Name" type="text" class="form-control" formControlName="name">
   </div>
 
-    <div class="form-group">
-        <input placeholder="Description" type="text" class="form-control" formControlName="description">
-    </div>
-    <button  [disabled]="disabaleBtn" (click)="create()" type="submit" class="btn btn-success">Submit</button>
-    <button type="cancel" class="btn btn-danger" [routerLink]="['/']">Cancel</button>
+  <div class="form-group">
+    <input placeholder="Description" type="text" class="form-control" formControlName="description">
+  </div>
+  <button [disabled]="disabaleBtn" (click)="create()" type="submit" class="btn btn-success">Submit</button>
+
+
+  <button type="cancel" class="btn btn-danger" [routerLink]="['/']">Cancel</button>
 </form>
 
+<body>
+<section>
+<a class="przycisk" href="#">Przycisk</a>
+</section>
+</body>
+
 <div *ngIf="opened">
-  <button #anchor class="k-button" (click)="onToggle()" >ok</button>
+  <button #anchor class="k-button" (click)="onToggle()">  OK</button>
   <div>
+    <br />
+    <br />
     <kendo-popup class="content" [anchor]="anchor" (anchorViewportLeave)="opened = true" *ngIf="opened">
       <!-- User-defined content -->
       <div class="content">
@@ -54,4 +64,4 @@
     </kendo-popup>
 
 
-    
+
