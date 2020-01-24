@@ -27,7 +27,7 @@ import { MatIconModule} from '@angular/material';
     FormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] }
+      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
     ]),
     PopupModule,
     BrowserAnimationsModule,
