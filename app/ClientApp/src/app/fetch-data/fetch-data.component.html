@@ -1,16 +1,4 @@
-<h1 id="tableLabel">Events</h1>
-
-<p>This component demonstrates fetching data from the server.</p>
-
-  
-
-<div class="test">
-  Test test test
-</div>
-
 <p *ngIf="!events"><em>Loading...</em></p>
-
-
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="events">
   <thead>
@@ -27,6 +15,7 @@
       <td>{{ event.description}}</td>
       <td><img src="{{ event.pathToImage}}" height="60" width="60"></td>
       <td> <button mat-raised-button (click)="delete(event.eventId)" type="submit" class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
+      <td> <button mat-raised-button (click)="attend(event.eventId)" type="submit" class="btn btn-success"><mat-icon>add</mat-icon></button></td>
     </tr>
   </tbody>
 </table>
@@ -52,6 +41,8 @@
         {{message}}
       </div>
     </kendo-popup>
+  </div>
+</div>
 
 
     

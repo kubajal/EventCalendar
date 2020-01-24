@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { MyEvent, MyEventAttrs} from "./event";
-import { CRUDResponse } from './CRUDResponse';
+import { CRUDResponse } from '../CRUDResponse';
 
 @Injectable({
   providedIn: 'root'

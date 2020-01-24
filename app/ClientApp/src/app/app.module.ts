@@ -13,6 +13,7 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule} from '@angular/material';
+import { AttendComponent } from './attend/attend.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MatIconModule} from '@angular/material';
     AppComponent,
     NavMenuComponent,
     FetchDataComponent,
+    AttendComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,6 +30,7 @@ import { MatIconModule} from '@angular/material';
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+      { path: 'attend', component: AttendComponent, canActivate: [AuthorizeGuard] },
     ]),
     PopupModule,
     BrowserAnimationsModule,

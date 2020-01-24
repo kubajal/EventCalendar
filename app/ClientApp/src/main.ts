@@ -10,7 +10,8 @@ export function getBaseUrl() {
 
 const providers = [
   { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
-  { provide: 'EVENT_CONTROLLER', useValue: "event"}
+  { provide: 'EVENT_CONTROLLER', useValue: "event"},
+  { provide: 'ATTEND_CONTROLLER', useValue: "attendance"}
 ];
 
 if (environment.production) {
