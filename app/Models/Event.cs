@@ -19,5 +19,7 @@ namespace app.Models
         public ApplicationUser Creator { get; set; }
         [Required]
         public List<ApplicationUserEvent> Subscribers { get; set; }
+        [Required]
+        public DateTime Date { get; set; }
     }
 }

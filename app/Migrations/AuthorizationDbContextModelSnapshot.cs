@@ -317,7 +317,7 @@ namespace app.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("ApplicationUserEvent");
+                    b.ToTable("ApplicationUserEvents");
                 });
 
             modelBuilder.Entity("app.Models.Event", b =>
@@ -328,6 +328,9 @@ namespace app.Migrations
 
                     b.Property<string>("CreatorId")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")

@@ -9,8 +9,8 @@ using app.Data;
 namespace app.Migrations
 {
     [DbContext(typeof(AuthorizationDbContext))]
-    [Migration("20200117203856_Initial")]
-    partial class Initial
+    [Migration("20200124162403_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -319,7 +319,7 @@ namespace app.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("ApplicationUserEvent");
+                    b.ToTable("ApplicationUserEvents");
                 });
 
             modelBuilder.Entity("app.Models.Event", b =>
@@ -330,6 +330,9 @@ namespace app.Migrations
 
                     b.Property<string>("CreatorId")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")

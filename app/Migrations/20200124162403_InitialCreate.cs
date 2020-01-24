@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace app.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -197,7 +197,8 @@ namespace app.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: false),
-                    CreatorId = table.Column<string>(nullable: false)
+                    CreatorId = table.Column<string>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -211,7 +212,7 @@ namespace app.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApplicationUserEvent",
+                name: "ApplicationUserEvents",
                 columns: table => new
                 {
                     EventId = table.Column<int>(nullable: false),
@@ -219,15 +220,15 @@ namespace app.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApplicationUserEvent", x => new { x.EventId, x.Id });
+                    table.PrimaryKey("PK_ApplicationUserEvents", x => new { x.EventId, x.Id });
                     table.ForeignKey(
-                        name: "FK_ApplicationUserEvent_Events_EventId",
+                        name: "FK_ApplicationUserEvents_Events_EventId",
                         column: x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "EventId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ApplicationUserEvent_AspNetUsers_Id",
+                        name: "FK_ApplicationUserEvents_AspNetUsers_Id",
                         column: x => x.Id,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -235,8 +236,8 @@ namespace app.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApplicationUserEvent_Id",
-                table: "ApplicationUserEvent",
+                name: "IX_ApplicationUserEvents_Id",
+                table: "ApplicationUserEvents",
                 column: "Id");
 
             migrationBuilder.CreateIndex(
@@ -306,7 +307,7 @@ namespace app.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ApplicationUserEvent");
+                name: "ApplicationUserEvents");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");

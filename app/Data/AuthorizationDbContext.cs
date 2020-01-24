@@ -20,6 +20,7 @@ namespace app.Data
         }
         public DbSet<ApplicationUser> DotNetUsers { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<ApplicationUserEvent> ApplicationUserEvents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
