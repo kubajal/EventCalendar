@@ -12,6 +12,8 @@ namespace app.Models
         public Event Event { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public int EventId { get; set; }
+
+        //Id w ApplicationUser
         public string Id { get; set; }
     }
 }

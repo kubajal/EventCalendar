@@ -2,7 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { EventService } from './event.service';
 import { MyEvent } from './event';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CRUDResponse } from './CRUDResponse';
+import { CRUDResponse } from '../CRUDResponse';
+import { AttendService } from '../attend/attend.service';
 
 @Component({
   selector: 'app-fetch-data',
@@ -20,6 +21,7 @@ export class FetchDataComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
+    private attendService: AttendService,
     @Inject('BASE_URL') baseUrl: string) {
   }
 
@@ -67,7 +69,7 @@ export class FetchDataComponent implements OnInit {
     this.disabaleBtn = false;
   }
 
-  delete(id: number) {
+  deleteEvent(id: number) {
     this.eventService.deleteEvent(id)
       .subscribe(
         (value) => {
@@ -77,6 +79,23 @@ export class FetchDataComponent implements OnInit {
           if (value.isSuccess) {
             this.events = this.events.filter(e => e.eventId !== id);
           }
+        },
+        (err) => {
+          const response: CRUDResponse = err.error;
+          this.message = response.message;
+          this.isSuccess = response.isSuccess;
+          this.opened = true;
+        }
+      );
+  }
+
+  attend(id: number) {
+    this.attendService.createAttendance(id)
+      .subscribe(
+        (value) => {
+          this.message = value.message;
+          this.isSuccess = value.isSuccess;
+          this.opened = true;
         },
         (err) => {
           const response: CRUDResponse = err.error;

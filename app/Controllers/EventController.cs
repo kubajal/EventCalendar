@@ -85,7 +85,7 @@ namespace app.Controllers
             }) ;
         }
         [HttpPost]
-        public object PostAsync(EventCreationModel e)
+        public CRUDResponse PostAsync(EventCreationModel e)
         {
             ApplicationUser CurrentUser = GetCurrentUser();
             Event newEvent = null;

@@ -1,0 +1,27 @@
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="attendedEvents">
+  <thead>
+    <tr>
+      <th>Event ID</th>
+      <th>Event name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let attendData of attendedEvents">
+      <td>{{ attendData.eventId }}</td>
+      <td>{{ attendData.eventName}}</td>
+      <td> <button mat-raised-button (click)="unattend(attendData.eventId)" type="submit" class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="opened">
+  <button #anchor class="k-button" (click)="onToggle()" >ok</button>
+  <div>
+    <kendo-popup class="content" [anchor]="anchor" (anchorViewportLeave)="opened = true" *ngIf="opened">
+      <!-- User-defined content -->
+      <div class="content">
+        {{message}}
+      </div>
+    </kendo-popup>
+  </div>
+</div>
