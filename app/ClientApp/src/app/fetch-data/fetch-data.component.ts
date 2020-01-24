@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { EventService } from './event.service';
 import { MyEvent } from './event';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -10,11 +9,11 @@ import { CRUDResponse } from './CRUDResponse';
   templateUrl: './fetch-data.component.html',
   styleUrls: ['./fetch-data.component.css']
 })
-export class FetchDataComponent implements OnInit{
+export class FetchDataComponent implements OnInit {
   public events: MyEvent[] = Array<MyEvent>();
 
   public message: string = null;
-  public opened: boolean = false;
+  public opened = false;
   public isSuccess: boolean = null;
   form: FormGroup;
   disabaleBtn = false;
@@ -22,19 +21,18 @@ export class FetchDataComponent implements OnInit{
   constructor(
     private eventService: EventService,
     @Inject('BASE_URL') baseUrl: string) {
-    //this.events = eventService.getEvents()
   }
-  
-  private paths: Array<string> = ["fruit", "kookaburra", "orange", "tree"]
+
+  private paths: Array<string> = ['fruit', 'kookaburra', 'orange', 'tree'];
 
   ngOnInit() {
     this.eventService.getEvents().subscribe(eventsFromApi => {
-      for (const event of (eventsFromApi as Array <MyEvent>)) {
+      for (const event of (eventsFromApi as Array<MyEvent>)) {
         this.events.push({
           eventId: event.eventId,
           description: event.description,
           name: event.name,
-          pathToImage: "assets/" + this.paths[Math.floor(Math.random() * 4)] + ".jpg"
+          pathToImage: 'assets/' + this.paths[Math.floor(Math.random() * 4)] + '.jpg'
         });
       }
     });
@@ -47,48 +45,46 @@ export class FetchDataComponent implements OnInit{
 
   create() {
     this.disabaleBtn = true;
-    let event = this.form.value;
+    const event = this.form.value;
     this.eventService.createEvent(event)
-    .subscribe(
-      (value: CRUDResponse) => 
-      {
-        this.message = "Event has been succesfully created";
-        this.isSuccess = value.isSuccess;
-        event.eventId = value.message.toString();
-        this.opened = true;
-        if(value.isSuccess)
-          this.events.push(new MyEvent(event));
-      },
-      (err) => 
-      {
-        let response: CRUDResponse = err.error;
-        this.message = response.message;
-        this.isSuccess = response.isSuccess;
-        this.opened = true;
-      }
-    );
+      .subscribe(
+        (value: CRUDResponse) => {
+          this.message = 'Event has been succesfully created';
+          this.isSuccess = value.isSuccess;
+          event.eventId = value.message.toString();
+          this.opened = true;
+          if (value.isSuccess) {
+           this.events.push(new MyEvent(event));
+          }
+        },
+        (err) => {
+          const response: CRUDResponse = err.error;
+          this.message = response.message;
+          this.isSuccess = response.isSuccess;
+          this.opened = true;
+        }
+      );
     this.disabaleBtn = false;
   }
 
   delete(id: number) {
     this.eventService.deleteEvent(id)
-    .subscribe(
-      (value) => 
-      {
-        this.message = value.message;
-        this.isSuccess = value.isSuccess;
-        this.opened = true;
-        if(value.isSuccess)
-          this.events = this.events.filter(e => e.eventId != id);
-      },
-      (err) => 
-      {
-        let response: CRUDResponse = err.error;
-        this.message = response.message;
-        this.isSuccess = response.isSuccess;
-        this.opened = true;
-      }
-    );
+      .subscribe(
+        (value) => {
+          this.message = value.message;
+          this.isSuccess = value.isSuccess;
+          this.opened = true;
+          if (value.isSuccess) {
+            this.events = this.events.filter(e => e.eventId !== id);
+          }
+        },
+        (err) => {
+          const response: CRUDResponse = err.error;
+          this.message = response.message;
+          this.isSuccess = response.isSuccess;
+          this.opened = true;
+        }
+      );
   }
 
   public onToggle() {
