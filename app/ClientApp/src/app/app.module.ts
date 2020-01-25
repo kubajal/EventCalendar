@@ -14,6 +14,7 @@ import { PopupModule } from '@progress/kendo-angular-popup';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule} from '@angular/material';
 import { AttendComponent } from './attend/attend.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { AttendComponent } from './attend/attend.component';
     NavMenuComponent,
     FetchDataComponent,
     AttendComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -31,6 +33,8 @@ import { AttendComponent } from './attend/attend.component';
     RouterModule.forRoot([
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'attend', component: AttendComponent, canActivate: [AuthorizeGuard] },
+      { path: 'home', component: HomeComponent },
+      { path: '', component: HomeComponent },
     ]),
     PopupModule,
     BrowserAnimationsModule,
