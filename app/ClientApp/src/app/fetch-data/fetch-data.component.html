@@ -1,50 +1,41 @@
 <p *ngIf="!events"><em>Loading...</em></p>
 
 <div>
-  <div class="container create-event">
-    <br>
-    <br>
-    <div *ngIf="isAuthenticated | async">
-      <h1>
-        Browse events
-      </h1>
+  <br><br>
+  <h1>Events I have created attend</h1>
+  <div class="container">
+    <table class='table table-striped bg-white text-dark' aria-labelledby="tableLabel" *ngIf="events">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of events">
+          <td><img src="{{ event.pathToImage}}" height="60" width="60"></td>
+          <td>{{ event.name}}</td>
+          <td>{{ event.date}}</td>
+          <td>{{ event.description}}</td>
+          <td> <button mat-raised-button (click)="deleteEvent(event.eventId)" type="submit" class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="opened">
+    <button #anchor class="k-button" (click)="onToggle()">ok</button>
+    <div>
+      <kendo-popup class="content" [anchor]="anchor" (anchorViewportLeave)="opened = true" *ngIf="opened">
+        <!-- User-defined content -->
+        <div class="content">
+          {{message}}
+        </div>
+      </kendo-popup>
     </div>
   </div>
-<br>
-
-<div class="container">
-  <table class='table table-striped bg-white text-dark' aria-labelledby="tableLabel" *ngIf="events">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let event of events">
-        <td><img src="{{ event.pathToImage}}" height="60" width="60"></td>
-        <td>{{ event.date}}</td>
-        <td>{{ event.name}}</td>
-        <td>{{ event.description}}</td>
-        <td> <button mat-raised-button (click)="deleteEvent(event.eventId)" type="submit" class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div *ngIf="opened">
-  <button #anchor class="k-button" (click)="onToggle()">ok</button>
-  <div>
-    <kendo-popup class="content" [anchor]="anchor" (anchorViewportLeave)="opened = true" *ngIf="opened">
-      <!-- User-defined content -->
-      <div class="content">
-        {{message}}
-      </div>
-    </kendo-popup>
-  </div>
-</div>
 </div>
 

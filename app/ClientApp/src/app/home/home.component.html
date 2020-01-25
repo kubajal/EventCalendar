@@ -1,7 +1,6 @@
-
+<br><br>
 <div class="container">
-
-    <div *ngIf="isAuthenticated | async">
+  <div *ngIf="isAuthenticated | async">
     <h1>
         Create a new event:
     </h1>
@@ -18,9 +17,9 @@
         <button [disabled]="disabaleBtn" (click)="create()" type="submit" class="btn btn-success create-event-button">Submit</button>
         <button type="cancel" class="btn btn-danger create-event-button" [routerLink]="['/']">Cancel</button>
     </form>
-    </div>
+  </div>
     
-  <table class='table table-striped bg-white text-dark' aria-labelledby="tableLabel" *ngIf="events">
+  <table class='table table-striped bg-white text-dark' style="margin-top: 20px;" aria-labelledby="tableLabel" *ngIf="events">
     <thead>
       <tr>
         <th></th>
@@ -40,6 +39,10 @@
       </tr>
     </tbody>
   </table>
+  <div class='text-dark'>
+    Only events that take place later than today are shown.
+  </div>
+  
 </div>
 
 <div *ngIf="opened">
