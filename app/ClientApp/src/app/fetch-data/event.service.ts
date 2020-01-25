@@ -14,14 +14,21 @@ export class EventService {
   constructor(
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
-    @Inject('EVENT_CONTROLLER') private eventControllerPath: string) {
+    @Inject('EVENT_CONTROLLER') private eventControllerPath: string,
+    @Inject('EVENTS_FOR_USER_ENDPOINT') private eventsForUserEndpoint: string) {
     this.baseUrl = baseUrl;
   }
-  
+
+  private paths: Array<string> = ['fruit', 'kookaburra', 'orange', 'tree'];
+
   getEvents(): Observable<MyEvent[]> {
-    return this.http.get<MyEventAttrs[]>(this.baseUrl + this.eventControllerPath).pipe(
-      map((result) => result.map((myEventAttrs) => new MyEvent(myEventAttrs)))
-    ); 
+    return this.http.get<MyEventAttrs[]>(this.baseUrl + this.eventControllerPath)
+      .pipe(map(result => result.map(myEventAttrs => new MyEvent(myEventAttrs))));
+  }
+
+  getEventsForUser(): Observable<MyEvent[]> {
+    return this.http.get<MyEventAttrs[]>(this.baseUrl + this.eventControllerPath + "/" + this.eventsForUserEndpoint)
+      .pipe(map(result => result.map(myEventAttrs => new MyEvent(myEventAttrs))));
   }
 
   createEvent(data: MyEventAttrs): Observable<any> {

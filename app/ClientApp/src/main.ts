@@ -11,6 +11,7 @@ export function getBaseUrl() {
 const providers = [
   { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
   { provide: 'EVENT_CONTROLLER', useValue: "event"},
+  { provide: 'EVENTS_FOR_USER_ENDPOINT', useValue: "user"},
   { provide: 'ATTEND_CONTROLLER', useValue: "attendance"}
 ];
 

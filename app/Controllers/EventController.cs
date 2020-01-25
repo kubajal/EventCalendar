@@ -14,7 +14,6 @@ using System.Data.Entity;
 
 namespace app.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class EventController : ControllerBase
@@ -39,14 +38,35 @@ namespace app.Controllers
         public IEnumerable<object> Get()
         {
             return DbContext.Events
+                .Where(e => e.Date > DateTime.Now)
                 .Select(e => new {
                     description = e.Description,
                     name = e.Name,
                     eventId = e.EventId,
+                    date = e.Date
                 })
                 .ToArray();
         }
 
+        [Route("user")]
+        [Authorize]
+        [HttpGet]
+        public IEnumerable<object> GetByUser()
+        {
+            ApplicationUser CurrentUser = GetCurrentUser();
+            return DbContext.Events
+                .Include(e => e.Creator)
+                .Where(e => e.Creator.Id == CurrentUser.Id)
+                .Select(e => new {
+                    description = e.Description,
+                    name = e.Name,
+                    eventId = e.EventId,
+                    date = e.Date
+                })
+                .ToArray();
+        }
+
+        [Authorize]
         [HttpDelete]
         public IActionResult Delete(String eventId)
         {
@@ -84,11 +104,19 @@ namespace app.Controllers
                 Message = "Event has been deleted"
             }) ;
         }
+        [Authorize]
         [HttpPost]
         public CRUDResponse PostAsync(EventCreationModel e)
         {
             ApplicationUser CurrentUser = GetCurrentUser();
             Event newEvent = null;
+
+            if(e.date < DateTime.Now)
+                return new CRUDResponse
+                {
+                    IsSuccess = false,
+                    Message = "Date cannot be earlier than today"
+                };
 
             try
             {
@@ -100,7 +128,8 @@ namespace app.Controllers
                         Description = e.description,
                         Name = e.name,
                         Subscribers = new List<ApplicationUserEvent>(),
-                        Creator = CurrentUser
+                        Creator = CurrentUser,
+                        Date = e.date
                     };
                 }
                 else
@@ -111,7 +140,8 @@ namespace app.Controllers
                         Description = e.description,
                         Name = e.name,
                         Subscribers = new List<ApplicationUserEvent>(),
-                        Creator = CurrentUser
+                        Creator = CurrentUser,
+                        Date = e.date
                     };
                 }
             }

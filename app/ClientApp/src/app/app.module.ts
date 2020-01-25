@@ -14,6 +14,7 @@ import { PopupModule } from '@progress/kendo-angular-popup';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule} from '@angular/material';
 import { AttendComponent } from './attend/attend.component';
+import { LoginMenuComponent } from 'src/api-authorization/login-menu/login-menu.component';
 import { HomeComponent } from './home/home.component';
 
 
@@ -23,7 +24,7 @@ import { HomeComponent } from './home/home.component';
     NavMenuComponent,
     FetchDataComponent,
     AttendComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,7 +40,8 @@ import { HomeComponent } from './home/home.component';
     PopupModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    ApiAuthorizationModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

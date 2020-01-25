@@ -1,1 +1,55 @@
-<img src="assets\party_1.jpg" alt="Welcome in Event Calendar!" style="width:100%;">
+
+<div class="container">
+
+    <div *ngIf="isAuthenticated | async">
+    <h1>
+        Create a new event:
+    </h1>
+    <form [formGroup]="form">
+        <div class="form-group">
+            <input placeholder="Name" type="text" class="form-control" formControlName="name">
+        </div>
+        <div class="form-group">
+            <input placeholder="Date" type="date" class="form-control" formControlName="date">
+        </div>
+        <div class="form-group">
+            <input placeholder="Description" type="text" class="form-control" formControlName="description">
+        </div>
+        <button [disabled]="disabaleBtn" (click)="create()" type="submit" class="btn btn-success create-event-button">Submit</button>
+        <button type="cancel" class="btn btn-danger create-event-button" [routerLink]="['/']">Cancel</button>
+    </form>
+    </div>
+    
+  <table class='table table-striped bg-white text-dark' aria-labelledby="tableLabel" *ngIf="events">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Description</th>
+        <div *ngIf="isAuthenticated | async"><th>Attend</th></div>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of events">
+        <td><img src="{{ event.pathToImage}}" height="60" width="60"></td>
+        <td>{{ event.date }}</td>
+        <td>{{ event.name }}</td>
+        <td>{{ event.description }}</td>
+        <div *ngIf="isAuthenticated | async"><td> <button mat-raised-button (click)="attend(event.eventId)" type="submit" class="btn btn-success"><mat-icon>add</mat-icon></button></td></div>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="opened">
+  <button #anchor class="k-button" (click)="onToggle()">ok</button>
+  <div>
+    <kendo-popup class="content" [anchor]="anchor" (anchorViewportLeave)="opened = true" *ngIf="opened">
+      <!-- User-defined content -->
+      <div class="content">
+        {{message}}
+      </div>
+    </kendo-popup>
+  </div>
+</div>

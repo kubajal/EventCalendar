@@ -4,6 +4,7 @@ import { MyEvent } from './event';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CRUDResponse } from '../CRUDResponse';
 import { AttendService } from '../attend/attend.service';
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
 
 @Component({
   selector: 'app-fetch-data',
@@ -22,19 +23,19 @@ export class FetchDataComponent implements OnInit {
   constructor(
     private eventService: EventService,
     private attendService: AttendService,
+    private authorizeService: AuthorizeService,
     @Inject('BASE_URL') baseUrl: string) {
   }
 
-  private paths: Array<string> = ['fruit', 'kookaburra', 'orange', 'tree'];
-
   ngOnInit() {
-    this.eventService.getEvents().subscribe(eventsFromApi => {
+    this.eventService.getEventsForUser().subscribe(eventsFromApi => {
       for (const event of (eventsFromApi as Array<MyEvent>)) {
         this.events.push({
           eventId: event.eventId,
           description: event.description,
           name: event.name,
-          pathToImage: 'assets/' + this.paths[Math.floor(Math.random() * 4)] + '.jpg'
+          date: event.date,
+          pathToImage: event.pathToImage
         });
       }
     });
@@ -43,30 +44,6 @@ export class FetchDataComponent implements OnInit {
       name: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required)
     });
-  }
-
-  create() {
-    this.disabaleBtn = true;
-    const event = this.form.value;
-    this.eventService.createEvent(event)
-      .subscribe(
-        (value: CRUDResponse) => {
-          this.message = 'Event has been succesfully created';
-          this.isSuccess = value.isSuccess;
-          event.eventId = value.message.toString();
-          this.opened = true;
-          if (value.isSuccess) {
-           this.events.push(new MyEvent(event));
-          }
-        },
-        (err) => {
-          const response: CRUDResponse = err.error;
-          this.message = response.message;
-          this.isSuccess = response.isSuccess;
-          this.opened = true;
-        }
-      );
-    this.disabaleBtn = false;
   }
 
   deleteEvent(id: number) {
@@ -89,26 +66,15 @@ export class FetchDataComponent implements OnInit {
       );
   }
 
-  attend(id: number) {
-    this.attendService.createAttendance(id)
-      .subscribe(
-        (value) => {
-          this.message = value.message;
-          this.isSuccess = value.isSuccess;
-          this.opened = true;
-        },
-        (err) => {
-          const response: CRUDResponse = err.error;
-          this.message = response.message;
-          this.isSuccess = response.isSuccess;
-          this.opened = true;
-        }
-      );
-  }
-
   public onToggle() {
     this.opened = false;
     this.message = null;
     this.isSuccess = false;
+  }
+
+  public isAuthenticated(): boolean {
+    let test = false;
+    // this.authorizeService.isAuthenticated().subscribe(e => test = e);        
+    return test;
   }
 }

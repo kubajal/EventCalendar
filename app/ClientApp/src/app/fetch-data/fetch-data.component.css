@@ -1,11 +1,6 @@
-/* Container holding the image and the text */
-.create {
-  position: relative;
-  text-align: center;
-  background-image: url('..\..\assets\party_3.jpg');
-  height: 250px;
+.create-event {
+  margin-bottom: 5%;
 }
-
-.list-events {
-  background-color: white
+.create-event-button {
+  margin-bottom: 5%;
 }

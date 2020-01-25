@@ -11,5 +11,6 @@ namespace app.Models
         public String eventId { get; set; }
         public String name { get; set; }
         public String description { get; set; }
+        public DateTime date { get; set; }
     }
 }
